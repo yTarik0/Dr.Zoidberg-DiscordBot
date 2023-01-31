@@ -101,43 +101,11 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
-    #creating .help command
-    if message.content.startswith(".help".capitalize()):
-        embed = discord.Embed(title="**Command-List for Zoidberg-Bot**", color=discord.Colour.random())
-        embed.add_field(name="🌐**.help**", value="list of all commands")
-        embed.add_field(name="🚪**.leave**", value="leave a server faster")
-        embed.add_field(name="ℹ️**.serverinfo**", value="gives info about the server")
-        embed.add_field(name="⚙️**.admin**",value="list all admin commands")
-        embed.set_footer(text="⭐ • Made by yTarik0")
-        await message.channel.send(embed=embed)
-
     # .leave command (fastest way for leaving dc server)
     if ".leave" in message.content:
         if str(message.author) != "tarik#5891":
             await message.guild.kick(message.author)
 
-
-
-    # .kick command
-    if message.content.startswith(".kick".capitalize()):
-        if message.mentions:
-            target = message.mentions[0]
-            usr = message.guild.get_member(message.author.id)
-            if usr.guild_permissions.administrator:
-                await target.kick()
-                embed = discord.Embed(title=f"**{target.name.capitalize()}** has been banned by **{message.author.capitalize()}**",color=discord.Colour.random())
-                embed.add_field(name="🆔**User ID**", value=target.id)
-                embed.add_field(name="💬**Reason**", value="test")
-                embed.add_field(name="📆**Kicked on**", value="2022-12-23")
-                embed.set_footer(text="⭐ • Made by yTarik0")
-                await message.channel.send(embed=embed)
-            else:
-                embed = discord.Embed(title="**You dont have the Permisson to do that!**",
-                                      color=discord.Colour.random())
-                embed.add_field(name="📆**Tried Command on **", value=message.created_at.strftime("%Y-%m-%d %H:%M:%S"))
-                embed.add_field(name="🆔**User ID**", value=message.author.id)
-                embed.set_footer(text="⭐ Made by yTarik0")
-                await message.channel.send(embed=embed)
 
 
     # .secret command later...
@@ -222,28 +190,6 @@ async def on_message(message):
 
 
 
-    # .ban command
-    if message.content.startswith(".ban".capitalize()):
-        if message.mentions:
-            target = message.mentions[0]
-            usr = message.guild.get_member(message.author.id)
-            if usr.guild_permissions.administrator:
-                await target.ban()
-                embed = discord.Embed(title=f"**{target.name}** has been banned by **{message.author}**", color=discord.Colour.random())
-                embed.add_field(name="🆔**User ID**", value=target.id)
-                embed.add_field(name="💬**Reason**", value="test")
-                embed.add_field(name="📆**Banned At**", value=message.created_at.strftime("%Y-%m-%d %H:%M:%S"))
-                embed.set_footer(text="⭐  •  Made by yTarik0")
-                await message.channel.send(embed=embed)
-            else:
-                embed = discord.Embed(title="**You dont have the Permisson to do that!**",
-                                      color=discord.Colour.random())
-                embed.add_field(name="📆**Tried Command on **", value=message.created_at.strftime("%Y-%m-%d %H:%M:%S"))
-                embed.add_field(name="🆔**User ID**", value=message.author.id)
-                embed.set_footer(text="⭐ Made by yTarik0")
-                await message.channel.send(embed=embed)
-
-
         #serverinfo command
     if message.content.startswith(".serverinfo"):
         server = message.guild
@@ -303,22 +249,54 @@ async def on_message(message):
         await message.guild.create_text_channel(name="nuked lol kys")
 
 
-# have to check how to import more modules on async def xyz():
-# and fix the error
+# ban command
+@client.tree.command(name="ban", description="ban a user")
+async def ban_user(interaction: discord.Interaction,user: discord.User,reason: str=None):
+    if interaction.user.guild_permissions.administrator:
+        await user.ban(reason=reason)
+        embed = discord.Embed(title=f"**{user.name} was banned by {interaction.user.name}**", color=discord.Colour.random())
+        embed.add_field(name="📆**Date **", value=interaction.created_at.strftime("%Y-%m-%d"))
+        embed.add_field(name="🆔**User ID**", value=user.id)
+        embed.add_field(name="💬**Reason**", value=reason)
+        embed.set_footer(text="⭐ Made by yTarik0")
+        await interaction.response.send_message(embed=embed)
 
-@client.tree.command(name="test", description="just for fun")
-async def test(message, interaction: discord.User):
-    target = message.mentions[0]
-    usr = message.guild.get_member(message.author.id)
-    if usr.guild_permissions.administrator:
-        await target.ban()
-        embed = discord.Embed(title=f"**{target.name}** has been banned by **{message.author}**",
-                              color=discord.Colour.random())
-        embed.add_field(name="🆔**User ID**", value=target.id)
-        embed.add_field(name="💬**Reason**", value="test")
-        embed.add_field(name="📆**Banned At**", value=message.created_at.strftime("%Y-%m-%d %H:%M:%S"))
-        embed.set_footer(text="⭐  •  Made by yTarik0")
+    else:
+        embed = discord.Embed(title="**You don't have the permission for that Command**", color=discord.Colour.random())
+        embed.set_footer(text="⭐ Made by yTarik0")
+        await interaction.response.send_message(embed=embed)
+
+
+    #kick command
+@client.tree.command(name="kick", description="ban a user")
+async def kick(interaction: discord.Interaction,user: discord.User,reason: str=None):
+        if interaction.user.guild_permissions.administrator:
+            await user.kick(reason=reason)
+            embed = discord.Embed(title=f"**{user.name} was kicked by {interaction.user.name}**",color=discord.Colour.random())
+            embed.add_field(name="📆**Date **", value=interaction.created_at.strftime("%Y-%m-%d"))
+            embed.add_field(name="🆔**User ID**", value=user.id)
+            embed.add_field(name="💬**Reason**", value=reason)
+            embed.set_footer(text="⭐ Made by yTarik0")
+            await interaction.response.send_message(embed=embed)
+
+        else:
+            embed = discord.Embed(title="**You don't have the permission for that Command**",
+                                  color=discord.Colour.random())
+            embed.set_footer(text="⭐ Made by yTarik0")
+            await interaction.response.send_message(embed=embed)
+
+
+#help command
+@client.tree.command(name="help",description="help command")
+async def help(interaction: discord.Interaction):
+    embed = discord.Embed(title="**Command-List for Zoidberg-Bot**", color=discord.Colour.random())
+    embed.add_field(name="🌐**.help**", value="list of all commands")
+    embed.add_field(name="🚪**.leave**", value="leave a server faster")
+    embed.add_field(name="ℹ️**.serverinfo**", value="gives info about the server")
+    embed.add_field(name="⚙️**.admin**", value="list all admin commands")
+    embed.set_footer(text="⭐ • Made by yTarik0")
     await interaction.response.send_message(embed=embed)
+
 
 
 
