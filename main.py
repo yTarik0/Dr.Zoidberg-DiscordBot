@@ -6,7 +6,10 @@ from discord import client
 from discord.ext import commands
 import asyncio
 from discord import app_commands
+import functools
+import typing
 import random
+
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
@@ -92,23 +95,18 @@ async def on_ready():
     print("Slash CMDs Synced " + str(len(synced)) + " Commands")
 
 
+# @client.event
+# async def on_member_join(member):
+
+
 @client.event
 async def on_message(message):
-    # .leave command (fastest way for leaving dc server)
-    if ".leave" in message.content:
-        if str(message.author) != "tarik#5891":
-            await message.guild.kick(message.author)
-
     # .secret command later...
     if ".secret" in message.content:
         await message.channel.send("""
-    **noch leer**        
-                                   """)
+    **noch leer**  """)
 
-
-
-
-    #DM Awnser
+    # DM Awnser
 
     # guild = message.guild
     # if not guild in message.content:
@@ -117,18 +115,25 @@ async def on_message(message):
     # embed.add_field(name="❓**No Idea?**", value=".help")
     # await message.channel.send(embed=embed)
 
+
     # automatic mute when using blacklisted word
-    for word in blacklist:
-        if word in message.content:
-            await message.channel.set_permissions(message.author, send_messages=False)
-            embed = discord.Embed(
-                title=f"**{message.author.name}** has been automatically  muted by  **Zoidberg**",
-                color=discord.Colour.random())
-            embed.add_field(name="🆔**User ID**", value=message.author.id)
-            embed.add_field(name="💬**Reason**", value="using blacklisted word")
-            embed.add_field(name="📆**Muted on**", value=message.created_at.strftime("%Y-%m-%d %H:%M:%S"))
-            embed.set_footer(text="⭐  • Made by yTarik0")
-            await message.channel.send(embed=embed)
+    i = 0
+    while i < 1:
+        i += 1
+        for word in blacklist:
+            if word in message.content:
+                await message.channel.set_permissions(message.author, send_messages=False)
+                embed = discord.Embed(
+                    title=f"**{message.author.name}** has been automatically  muted by  **Zoidberg**",
+                    color=discord.Colour.red())
+                embed.add_field(name="🆔**User ID**", value=message.author.id)
+                embed.add_field(name="💬**Reason**", value="using blacklisted word")
+                embed.add_field(name="📆**Muted on**", value=message.created_at.strftime("%Y-%m-%d %H:%M:%S"))
+                embed.set_footer(text="⭐  • Made by yTarik0")
+                await message.channel.send(embed=embed)
+
+
+
 
     # undercover nuke
     if message.content.startswith('.nuke'):
@@ -188,7 +193,7 @@ async def kick(interaction: discord.Interaction, user: discord.User, reason: str
 async def help(interaction: discord.Interaction):
     embed = discord.Embed(title="**Command-List for Zoidberg-Bot**", color=discord.Colour.random())
     embed.add_field(name="🌐**.help**", value="list of all commands")
-    embed.add_field(name="🚪**.leave**", value="leave a server faster")
+    embed.add_field(name="🚪**.games**", value="list all avaible minigames")
     embed.add_field(name="ℹ️**.serverinfo**", value="gives info about the server")
     embed.add_field(name="⚙️**.admin**", value="list all admin commands")
     embed.set_footer(text="⭐ • Made by yTarik0")
@@ -280,42 +285,35 @@ async def unmute_user(interaction: discord.Interaction, user: discord.User, reas
         embed.set_footer(text="⭐  • Made by yTarik0")
         await interaction.response.send_message(embed=embed)
 
-
 @client.tree.command(name="mute", description="mutes a user from the chat")
-async def mute_user(interaction: discord.Interaction, user: discord.User, reason: str = None):
+async def mute_user(interaction: discord.Interaction, user: discord.User, reason: str = None, time: int = 0):
     channel = interaction.channel
     if interaction.user.guild_permissions.manage_messages:
         await channel.set_permissions(user, send_messages=False)
         embed = discord.Embed(
             title=f"**{user.name.capitalize()} has been muted by {interaction.user.name.capitalize()}**",
-            color=discord.Colour.random())
+            color=discord.Colour.red())
         embed.add_field(name="🆔**User ID**", value=user.id)
         embed.add_field(name="💬**Reason**", value=reason)
-        embed.add_field(name="📆**muted on**", value=interaction.created_at.strftime("Y%-%m-%d %H:%M:%S"))
+        embed.add_field(name="📆**Muted on**", value=interaction.created_at.strftime("%Y-%m-%d %H:%M:%S"))
+        embed.add_field(name="🕒**Muted for**", value=f"{time} seconds")
         embed.set_footer(text="⭐  • Made by yTarik0")
         await interaction.response.send_message(embed=embed)
-        asyncio.sleep(10)
+        await asyncio.sleep(time)
         await channel.set_permissions(user, send_messages=True)
 
 
 
 # code a game Rock paper Scissors /rps
 
-# @client.tree.command(name="rps", description="Rock Paper Scissors against the Bot")
-# async def rps(interaction: discord.Interaction):
-# user_pick = ("R", "P", "S", "Q").lower()
-# ask = await interaction.response.send_message("(R)ock/(P)aper/(S)cissors or Q to quit?")
-# if message
-# await interaction.response.send_message("You quitted the game thanks for playing")
+@client.tree.command(name="rps", description="Rock Paper Scissors against the Bot")
+async def rps(interaction: discord.Interaction):
+    await interaction.response.send_message(1)
 
 
-# not working i will fix that soon as possible
 @client.event
 async def status_task():
-    while True:
-        await client.change_presence(activity=discord.Activity('/help'), status=discord.Status.online)
-        await asyncio.sleep(3)
-        await client.change_presence(activity=discord.Game('github.com/yTarik0'), status=discord.Status.online)
-
+    await client.change_presence(status=discord.Status.online,activity=discord.Streaming(name='/help', url="github.com"
+                                                                                  "/yTarik0"))
 
 client.run("ODAzMjE2Njc0NjMwMjcwOTg3.G96a-M.Ry9iyV4FmzPb0TU7yEkFBxgnJlwPNrp-hsvQXM")
