@@ -1,5 +1,9 @@
-# DiscordBot 2023 "Zoidberg" by yTarik0 and 1momo7
-
+# DiscordBot 2023 "Zoidberg" 
+# by yTarik0 and 1momo7
+# Author:  @yTarik0
+# Version: @v1.0 {BETA}
+# Date:    @03.02.2023
+# Bot:     @Zoidberg
 
 import discord
 from discord import client
