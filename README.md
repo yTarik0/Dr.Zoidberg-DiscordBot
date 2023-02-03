@@ -28,6 +28,8 @@ Welcome to the Discord Bot Dr. Zoidberg!
 
 
 
+
+
 Invite Link for the Dr.Zoidberg-Bot:
 
 https://discord.com/oauth2/authorize?client_id=803216674630270987&permissions=8&scope=bot
