@@ -18,6 +18,12 @@ Welcome to the Discord Bot Dr. Zoidberg!
     3. Help: This command provides you with a list of all available commands and a brief explanation of each command's function.
 
   Dr. Zoidberg is easy to use and offers a variety of useful features to manage your Discord server. Give it a try and experience how easy it can be!
+  
+  
+  If you have any question you can contact me on:
+  https://twitter.com/yTarik0
+  Discord: tarik#5891
+  
 
 
 
