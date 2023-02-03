@@ -241,12 +241,12 @@ async def clear(interaction: discord.Interaction, amount: int = 0):
     if interaction.user.guild_permissions.manage_messages:
         try:
             await channel.purge(limit=amount + 1)
-            embed = discord.Embed(title=f"{interaction.user.name.capitalize()} cleared {amount} Messages",
+            embed = discord.Embed(title=f"{interaction.user.name} cleared {amount} Messages",
                                   color=discord.Colour.random())
             embed.add_field(name="🆔 **User ID**", value=interaction.user.id)
             embed.add_field(name="📆**Cleared Messages At**", value=interaction.created_at.strftime("%Y-%m-%d %H:%M:%S"))
             embed.set_footer(text="⭐ Made by yTarik0")
-            await interaction.response.send_message(embed=embed, ephemeral=True)
+            await channel.send(embed=embed)
         except ValueError:
             embed = discord.Embed(title="**Please enter a valid number of messages to delete.**",
                                   color=discord.Colour.random())
@@ -277,11 +277,11 @@ async def unmute_user(interaction: discord.Interaction, user: discord.User, reas
     if interaction.user.guild_permissions.manage_messages:
         await channel.set_permissions(user, send_messages=True)
         embed = discord.Embed(
-            title=f"**{user.name.capitalize()} has been unmuted by {interaction.user.name.capitalize()}**",
+            title=f"**{user.name} has been unmuted by {interaction.user.name}**",
             color=discord.Colour.random())
         embed.add_field(name="🆔**User ID**", value=user.id)
         embed.add_field(name="💬**Reason**", value=reason)
-        embed.add_field(name="📆**Unmuted on**", value=interaction.created_at.strftime("Y%-%m-%d %H:%M:%S"))
+        embed.add_field(name="📆**Unmuted on**", value=interaction.created_at.strftime("%Y-%m-%d %H:%M:%S"))
         embed.set_footer(text="⭐  • Made by yTarik0")
         await interaction.response.send_message(embed=embed)
 
@@ -291,14 +291,15 @@ async def mute_user(interaction: discord.Interaction, user: discord.User, reason
     if interaction.user.guild_permissions.manage_messages:
         await channel.set_permissions(user, send_messages=False)
         embed = discord.Embed(
-            title=f"**{user.name.capitalize()} has been muted by {interaction.user.name.capitalize()}**",
+            title=f"**{user.name} has been muted by {interaction.user.name}**",
             color=discord.Colour.red())
         embed.add_field(name="🆔**User ID**", value=user.id)
         embed.add_field(name="💬**Reason**", value=reason)
         embed.add_field(name="📆**Muted on**", value=interaction.created_at.strftime("%Y-%m-%d %H:%M:%S"))
         embed.add_field(name="🕒**Muted for**", value=f"{time} seconds")
         embed.set_footer(text="⭐  • Made by yTarik0")
-        await interaction.response.send_message(embed=embed)
+        await interaction.response.defer()
+        await interaction.followup.send(embed=embed)
         await asyncio.sleep(time)
         await channel.set_permissions(user, send_messages=True)
 
