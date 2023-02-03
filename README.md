@@ -6,6 +6,7 @@
 
 
 Welcome to the Discord Bot Dr. Zoidberg!
+Just started 1.5 weeks ago coding this bot just for fun.
 
   This bot was developed to help you with the management of your Discord server. 
   Its my first discord bot and made with python. Here are some of its features:
