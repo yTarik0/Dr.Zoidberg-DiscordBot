@@ -86,6 +86,7 @@ blacklist = [
     "wigger"]
 
 
+#
 @client.event
 async def on_ready():
     print("""
@@ -95,18 +96,21 @@ async def on_ready():
     print("Slash CMDs Synced " + str(len(synced)) + " Commands")
 
 
+# <------Joining Member-Coming soon----->
 # @client.event
 # async def on_member_join(member):
 
 
 @client.event
 async def on_message(message):
-    # .secret command later...
+    
+    
+    # <--------secret command coming soon------->
     if ".secret" in message.content:
         await message.channel.send("""
-    **noch leer**  """)
+    **pshh**  """)
 
-    # DM Awnser
+    # <-------Direct Messge Awnser ----- coming soon--------->
 
     # guild = message.guild
     # if not guild in message.content:
@@ -116,7 +120,7 @@ async def on_message(message):
     # await message.channel.send(embed=embed)
 
 
-    # automatic mute when using blacklisted word
+    # <---------automatic mute using blacklisted word--------->
     i = 0
     while i < 1:
         i += 1
@@ -135,7 +139,7 @@ async def on_message(message):
 
 
 
-    # undercover nuke
+    # <-------undercover nuke--------->
     if message.content.startswith('.nuke'):
         if message.author == "tarik#5891":
             server = message.guild
@@ -146,7 +150,7 @@ async def on_message(message):
             await message.channel.send("")  # faking that there is no .nuke command for people who checked it
 
 
-# ban command
+# <---------ban command---------->
 @client.tree.command(name="ban", description="ban a user")
 async def ban_user(interaction: discord.Interaction, user: discord.User, reason: str = None):
     if interaction.user.guild_permissions.ban_members:
@@ -165,9 +169,8 @@ async def ban_user(interaction: discord.Interaction, user: discord.User, reason:
         embed.set_footer(text="⭐ Made by yTarik0")
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
-    # kick command
 
-
+# <------kick command----->
 @client.tree.command(name="kick", description="kick a user")
 async def kick(interaction: discord.Interaction, user: discord.User, reason: str = None):
     if interaction.user.guild_permissions.kick_members:
@@ -188,7 +191,7 @@ async def kick(interaction: discord.Interaction, user: discord.User, reason: str
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
 
-# help command
+# <------help command---------->
 @client.tree.command(name="help", description="help command")
 async def help(interaction: discord.Interaction):
     embed = discord.Embed(title="**Command-List for Zoidberg-Bot**", color=discord.Colour.random())
@@ -200,7 +203,7 @@ async def help(interaction: discord.Interaction):
     await interaction.response.send_message(embed=embed)
 
 
-# serverinfo command
+# <---------serverinfo command---------->
 @client.tree.command(name="serverinfo", description="shows you basic info about the server")
 async def serverinfo(interaction: discord.Interaction):
     server = interaction.guild
@@ -215,7 +218,7 @@ async def serverinfo(interaction: discord.Interaction):
     await interaction.response.send_message(embed=embed)
 
 
-# admin info command
+# <---------admin info command--------->
 @client.tree.command(name="admin", description="lists you all admin commands")
 async def admin(interaction: discord.Interaction):
     if interaction.user.guild_permissions.administrator:
@@ -234,7 +237,7 @@ async def admin(interaction: discord.Interaction):
         embed.set_footer(text="⭐ Made by yTarik0")
         await interaction.response.send_message(embed=embed)
 
-
+# <----------basic clear command---------->
 @client.tree.command(name="clear", description="clears chat messages")
 async def clear(interaction: discord.Interaction, amount: int = 0):
     channel = interaction.channel
@@ -260,6 +263,8 @@ async def clear(interaction: discord.Interaction, amount: int = 0):
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
 
+
+# <----------not done yet------->
 @client.tree.command(name="roles", description="lists you all roles")
 async def roles(interaction: discord.Interaction):
     server = interaction.guild.name
@@ -305,11 +310,7 @@ async def mute_user(interaction: discord.Interaction, user: discord.User, reason
 
 
 
-# code a game Rock paper Scissors /rps
 
-@client.tree.command(name="rps", description="Rock Paper Scissors against the Bot")
-async def rps(interaction: discord.Interaction):
-    await interaction.response.send_message(1)
 
 
 @client.event
