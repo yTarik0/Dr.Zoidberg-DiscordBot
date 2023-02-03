@@ -317,4 +317,4 @@ async def status_task():
     await client.change_presence(status=discord.Status.online,activity=discord.Streaming(name='/help', url="github.com"
                                                                                   "/yTarik0"))
 
-client.run("ODAzMjE2Njc0NjMwMjcwOTg3.G96a-M.Ry9iyV4FmzPb0TU7yEkFBxgnJlwPNrp-hsvQXM")
+client.run("Your-Bot-Token")
