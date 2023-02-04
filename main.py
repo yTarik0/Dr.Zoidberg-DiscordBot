@@ -100,7 +100,7 @@ async def on_ready():
     print("Slash CMDs Synced " + str(len(synced)) + " Commands")
 
 
-# <------Joining Member-Coming soon----->
+# <------Joining Member------>
 @client.event
 async def on_member_join(member):
     print("Recognised that a member called " + member.name + " joined the Server")
@@ -114,6 +114,19 @@ async def on_member_join(member):
     #embed.url(url=server.icon.url)
     embed.set_footer(text="⭐  • Dr.Zoidberg|Systems")
     await channel.send(embed=embed)
+    
+# <------Leaving Member-Message------>
+@client.event
+async def on_member_remove(member):
+    channel = client.get_channel("Your-Channel-Id")
+    server = member.guild
+    print("Recognised that a member called " + member.name + " left")
+    embed=discord.Embed(title=f"**{member.name}  just left the Server {server.name}👋**",
+                        color=discord.Color.red())
+    embed.set_footer(text="⭐  • Dr.Zoidberg | Systems")
+    #embed.url(icon_url=member.display_avatar.url)
+    await channel.send(embed=embed)
+ 
 
 
 @client.event
