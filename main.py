@@ -256,7 +256,7 @@ async def clear(interaction: discord.Interaction, amount: int = 0):
 
 
 
-# <----------not done yet------->
+# <----------role-command-list-all-roles--not done yet------->
 @client.tree.command(name="roles", description="lists you all roles")
 async def roles(interaction: discord.Interaction):
     server = interaction.guild.name
