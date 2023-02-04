@@ -101,8 +101,19 @@ async def on_ready():
 
 
 # <------Joining Member-Coming soon----->
-# @client.event
-# async def on_member_join(member):
+@client.event
+async def on_member_join(member):
+    print("Recognised that a member called " + member.name + " joined the Server")
+    channel = client.get_channel("Your-Channel-Id")
+    server = member.guild
+    embed = discord.Embed(title=f"👋**Welcome  {member.name}**" ,
+                          color=discord.Color.blue())
+    embed.add_field(name="📚**Rules**",value="Please make sure that you read the rules")
+    embed.add_field(name="**❓*Support**",value="If you have any questions open a ticket ")
+    embed.add_field(name="🍿**Enjoy**",value=f"Have Fun and enjoy chatting and talking on the Server **{server.name}**")
+    #embed.url(url=server.icon.url)
+    embed.set_footer(text="⭐  • Dr.Zoidberg|Systems")
+    await channel.send(embed=embed)
 
 
 @client.event
