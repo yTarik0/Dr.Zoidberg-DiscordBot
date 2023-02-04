@@ -1,4 +1,4 @@
-# discordbot.py_yTarik0
+# Dr.ZoidBerg-Discordbot
 # Author:  @yTarik0
 # Version: @v1.0 {BETA}
 # Date:    @03.02.2023
