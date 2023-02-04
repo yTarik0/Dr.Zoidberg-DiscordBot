@@ -114,7 +114,7 @@ async def on_message(message):
         await message.channel.send("""
     **pshh**  """)
 
-    # <-------Direct Messge Awnser ----- coming soon--------->
+    # <-------Direct Message Awnser ----- coming soon--------->
 
     # guild = message.guild
     # if not guild in message.content:
