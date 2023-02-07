@@ -22,7 +22,7 @@ Just started 1.5 weeks ago coding this bot just for fun.
  
 Information for People who want to add the Dr.Zoidberg Bot to their Discord Server:
   
-    The Dr.Zoidberg Discordbot has a new ChatGPT feature, you can now collaborate with the bot to share information in Discord chat quickly and easily. The     Dr. Zoidberg bot will also be able to answer certain questions asked by users, making it a great addition to any project. We hope you enjoy using this     new feature as much as we do!
+   The Dr.Zoidberg Discordbot has a new ChatGPT feature, you can now collaborate with the bot to share information in Discord chat quickly and easily. The    Dr. Zoidberg bot will also be able to answer certain questions asked by users, making it a great addition to any project. We hope you enjoy using this      new feature as much as we do!
   
   If you have any question you can contact me on:
   
