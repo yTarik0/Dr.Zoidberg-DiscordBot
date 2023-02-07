@@ -61,9 +61,8 @@ blacklist = [
 
 @client.event
 async def on_ready():
-    print("""
-              ボットはオンラインです
-        """)
+    pclient.loop.create_task(status_task())
+    print("ボットはオンラインです, online")
     synced = await client.tree.sync()
     print("Slash CMDs Synced " + str(len(synced)) + " Commands")
 
@@ -331,10 +330,14 @@ async def avatar(interaction: discord.Interaction, user: discord.User):
     embed = discord.Embed(title=f"**{user}s Avatar:**",color=discord.Colour.yellow()).set_image(url=user.avatar.url)
     embed.set_footer(text="⭐  • Dr.Zoidberg | Systems")
     await interaction.response.send_message(embed=embed)
-
+                    
+# <-----Change Status------->
 @client.event
 async def status_task():
-    await client.change_presence(status=discord.Status.online,activity=discord.Streaming(name='/help', url="github.com"
-                                                                                  "/yTarik0"))
+    while True:
+        await client.change_presence(activity=discord.Game('/help'), status=discord.Status.online)
+        await asyncio.sleep(3)
+        await client.change_presence(activity=discord.Game('github.com/yTarik0'), status=discord.Status.online)
+        await asyncio.sleep(3)
 
 client.run("Your-DiscordBot-Token")
