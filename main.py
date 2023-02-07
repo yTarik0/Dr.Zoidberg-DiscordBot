@@ -99,7 +99,7 @@ async def on_ready():
     print("Slash CMDs Synced " + str(len(synced)) + " Commands")
 
 
-# <------Joining Member-Coming soon----->
+# <------Joining Member------->
 @client.event
 async def on_member_join(member):
     print("Recognised that a member called " + member.name + " joined the Server")
