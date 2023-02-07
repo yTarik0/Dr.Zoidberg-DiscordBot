@@ -18,7 +18,7 @@ import random
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
-client = commands.Bot(command_prefix='/', intents=intents, application_id=803216674630270987)
+client = commands.Bot(command_prefix='/', intents=intents, application_id="Your_Application_ID")
 
 # blacklisted words
 blacklist = [
