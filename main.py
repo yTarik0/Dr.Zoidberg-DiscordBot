@@ -25,12 +25,10 @@ blacklist = [
     "anus",
     "anal", "biatch", "bitch",
     "cum", "cock",
-    "dick", "douchebag", "dick",
+    "dick", "dick",
     "faggot", "fatass",
-    "gash", "gimp", "golliwog",
-    "gook",
-    "goy", "gay" "goyim",
-    "gyp", "gypsy", "gipsy",
+    "gay" "goyim",
+    "gypsy", "gipsy",
     "homo",
     "hurensohn",
     "hure",
@@ -42,8 +40,8 @@ blacklist = [
     "nig-nog",
     "nigga",
     "nigger",
-    "nigg4"
-    "neger"
+    "nigg4",
+    "neger",
     "nigguh",
     "neger",
     "nutte",
@@ -52,23 +50,13 @@ blacklist = [
     "prostitute",
     "pussie",
     "pussy",
-    "shemale",
     "schlampe",
-    "skank",
     "slut",
-    "soyboy",
-    "spade",
-    "sperg",
-    "spic",
     "schwuchtel",
     "schwanz",
-    "tard",
     "tits",
     "titt",
-    "trannie",
-    "tranny",
-    "whore",
-    "wigger"]
+    "whore"]
 
 
 @client.event
