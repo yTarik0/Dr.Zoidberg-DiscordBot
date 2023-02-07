@@ -123,7 +123,7 @@ async def on_message(message):
                 embed.add_field(name="🆔**User ID**", value=message.author.id)
                 embed.add_field(name="💬**Reason**", value="using blacklisted word")
                 embed.add_field(name="📆**Muted on**", value=message.created_at.strftime("%Y-%m-%d %H:%M:%S"))
-                embed.set_footer(text="⭐  • Made by yTarik0")
+                embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
                 await message.channel.send(embed=embed)
 
 
@@ -139,12 +139,12 @@ async def ban_user(interaction: discord.Interaction, user: discord.User, reason:
         embed.add_field(name="🆔**User ID**", value=user.id)
         embed.add_field(name="💬**Reason**", value=reason)
         embed.set_thumbnail(url=user.icon.url)
-        embed.set_footer(text="⭐ Made by yTarik0")
+        embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
         await interaction.response.send_message(embed=embed)
 
     else:
         embed = discord.Embed(title="**You don't have the permission for that Command**", color=discord.Colour.random())
-        embed.set_footer(text="⭐ Made by yTarik0")
+        embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
 
@@ -161,13 +161,13 @@ async def kick(interaction: discord.Interaction, user: discord.User, reason: str
         embed.add_field(name="🆔**User ID**", value=user.id)
         embed.add_field(name="💬**Reason**", value=reason)
         embed.set_thumbnail(url=server.icon.url)
-        embed.set_footer(text="⭐ Made by yTarik0")
+        embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
         await interaction.response.send_message(embed=embed)
 
     else:
         embed = discord.Embed(title="**You don't have the permission for that Command**",
                               color=discord.Colour.random())
-        embed.set_footer(text="⭐ Made by yTarik0")
+        embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
 
@@ -179,7 +179,7 @@ async def help(interaction: discord.Interaction):
     embed.add_field(name="🚪**.games**", value="list all avaible minigames")
     embed.add_field(name="ℹ️**.serverinfo**", value="gives info about the server")
     embed.add_field(name="⚙️**.admin**", value="list all admin commands")
-    embed.set_footer(text="⭐ • Made by yTarik0")
+    embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
     await interaction.response.send_message(embed=embed)
 
 
@@ -195,7 +195,7 @@ async def serverinfo(interaction: discord.Interaction):
     embed.add_field(name="👑**Server Owner**", value=server.owner)
     embed.add_field(name="👥**Server Member Count**", value=server.member_count)
     embed.set_thumbnail(url=server.icon.url)
-    embed.set_footer(text="⭐  •  Made by yTarik0")
+    embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
     await interaction.response.send_message(embed=embed)
 
 
@@ -210,12 +210,12 @@ async def admin(interaction: discord.Interaction):
         embed.add_field(name="🔐**.mute**", value="chat-locks a user")
         embed.add_field(name="🔓**.unmute**", value="unlock a user (from the chat)")
         embed.add_field(name="⚙️**.admin**", value="list all admin commands")
-        embed.set_footer(text="⭐ • Made by yTarik0")
+        embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
         await interaction.response.send_message(embed=embed)
     else:
         embed = discord.Embed(title="**You don't have the permission for that Command**",
                               color=discord.Colour.random())
-        embed.set_footer(text="⭐ Made by yTarik0")
+        embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
         await interaction.response.send_message(embed=embed)
 
 
@@ -230,18 +230,18 @@ async def clear(interaction: discord.Interaction, amount: int = 0):
                                   color=discord.Colour.random())
             embed.add_field(name="🆔 **User ID**", value=interaction.user.id)
             embed.add_field(name="📆**Cleared Messages At**", value=interaction.created_at.strftime("%Y-%m-%d %H:%M:%S"))
-            embed.set_footer(text="⭐ Made by yTarik0")
+            embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
             await channel.send(embed=embed)
         except ValueError:
             embed = discord.Embed(title="**Please enter a valid number of messages to delete.**",
                                   color=discord.Colour.random())
-            embed.set_footer(text="⭐ Made by yTarik0")
+            embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
             await interaction.response.send_message(embed=embed, ephemeral=True)
 
     else:
         embed = discord.Embed(title="**You don't have the permission for that Command**",
                               color=discord.Colour.random())
-        embed.set_footer(text="⭐ Made by yTarik0")
+        embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
 
@@ -258,7 +258,7 @@ async def roles(interaction: discord.Interaction):
     embed = discord.Embed(title="**All Discord Roles:**",
                           color=discord.Colour.random())
     embed.add_field(name=f"**🔰Roles:**({len(rolelist)})", value="".join([b]))
-    embed.set_footer(text="⭐ Made by yTarik0")
+    embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
     await interaction.response.send_message(embed=embed)
 
 # <-------unmute-command---------->
@@ -273,7 +273,7 @@ async def unmute_user(interaction: discord.Interaction, user: discord.User, reas
         embed.add_field(name="🆔**User ID**", value=user.id)
         embed.add_field(name="💬**Reason**", value=reason)
         embed.add_field(name="📆**Unmuted on**", value=interaction.created_at.strftime("%Y-%m-%d %H:%M:%S"))
-        embed.set_footer(text="⭐  • Made by yTarik0")
+        embed.set_footer(text="⭐  • Dr.Zoidberg | Systems")
         await interaction.response.send_message(embed=embed)
 
 # <-------mute-command------->
@@ -289,7 +289,7 @@ async def mute_user(interaction: discord.Interaction, user: discord.User, reason
         embed.add_field(name="💬**Reason**", value=reason)
         embed.add_field(name="📆**Muted on**", value=interaction.created_at.strftime("%Y-%m-%d %H:%M:%S"))
         embed.add_field(name="🕒**Muted for**", value=f"{time} seconds")
-        embed.set_footer(text="⭐  • Made by yTarik0")
+        embed.set_footer(text="⭐  • Dr.Zoidberg | Systems")
         await interaction.response.defer()
         await interaction.followup.send(embed=embed)
         await asyncio.sleep(time)
