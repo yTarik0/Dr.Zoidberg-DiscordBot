@@ -1,7 +1,7 @@
 # Dr.ZoidBerg-Discordbot
 # Author:  @yTarik0
-# Version: @v1.0 {BETA}
-# Date:    @03.02.2023
+# Version: @v1.1 {BETA}
+# Date:    @06.02.2023
 # Bot:     @Dr.Zoidberg
 
 
