@@ -4,6 +4,7 @@
 # Date:    @06.02.2023
 # Bot:     @Dr.Zoidberg
 
+![](https://komarev.com/ghpvc/?username=yTarik0&color=green&style=for-the-badge)
 
 Welcome to the Discord Bot Dr. Zoidberg!
 Just started 1.5 weeks ago coding this bot just for fun.
@@ -34,4 +35,4 @@ Invite Link for the Dr.Zoidberg-Bot:
 
   https://discord.com/oauth2/authorize?client_id=803216674630270987&permissions=8&scope=bot
   
-  ![](https://komarev.com/ghpvc/?username=yTarik0&color=green&style=for-the-badge)
+  
