@@ -179,7 +179,7 @@ async def help(interaction: discord.Interaction):
     embed.add_field(name="🎭**avatar**", value="shows a users avatar")
     embed.add_field(name="ℹ️**serverinfo**", value="gives info about the server")
     embed.add_field(name="⚙️**admin**", value="list all admin commands")
-    embed.add_field(name="ℹ️**userainfo**", value="gives information about a user")
+    embed.add_field(name="ℹ️**userainfo**", value="gives information about an user")
     embed.add_field(name="🔰**roles**", value="list all server roles"
     embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
     await interaction.response.send_message(embed=embed)
