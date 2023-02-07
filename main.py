@@ -175,10 +175,12 @@ async def kick(interaction: discord.Interaction, user: discord.User, reason: str
 @client.tree.command(name="help", description="help command")
 async def help(interaction: discord.Interaction):
     embed = discord.Embed(title="**Command-List for Zoidberg-Bot**", color=discord.Colour.random())
-    embed.add_field(name="🌐**.help**", value="list of all commands")
-    embed.add_field(name="🚪**.games**", value="list all avaible minigames")
-    embed.add_field(name="ℹ️**.serverinfo**", value="gives info about the server")
-    embed.add_field(name="⚙️**.admin**", value="list all admin commands")
+    embed.add_field(name="🌐**help**", value="list of all commands")
+    embed.add_field(name="🎭**avatar**", value="shows a users avatar")
+    embed.add_field(name="ℹ️**serverinfo**", value="gives info about the server")
+    embed.add_field(name="⚙️**admin**", value="list all admin commands")
+    embed.add_field(name="ℹ️**userainfo**", value="gives information about a user")
+    embed.add_field(name="🔰**roles**", value="list all server roles"
     embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
     await interaction.response.send_message(embed=embed)
 
@@ -298,8 +300,8 @@ async def mute_user(interaction: discord.Interaction, user: discord.User, reason
 #<------info command------>
 # for getting userinfo
 
-@client.tree.command(name="info", description="gives information about a user")
-async def info(interaction: discord.Interaction, user: discord.User):
+@client.tree.command(name="userinfo", description="gives information about a user")
+async def userinfo(interaction: discord.Interaction, user: discord.User):
 
     rolelist = []
     for role in user.roles:
