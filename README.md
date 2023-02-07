@@ -33,3 +33,5 @@ Information for People who want to add the Dr.Zoidberg Bot to their Discord Serv
 Invite Link for the Dr.Zoidberg-Bot:
 
   https://discord.com/oauth2/authorize?client_id=803216674630270987&permissions=8&scope=bot
+  
+  ![](https://komarev.com/ghpvc/?username=yTarik0&color=green)
