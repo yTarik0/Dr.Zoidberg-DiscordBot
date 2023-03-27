@@ -1,13 +1,14 @@
 # Dr.ZoidBerg-Discordbot
 # Author:  @yTarik0
-# Version: @v1.2 {BETA}
-# Date:    @06.02.2023
+# Version: @v1.5 {BETA}
+# Publish-Date:    @06.02.2023
 # Bot:     @Dr.Zoidberg
 
 ![](https://komarev.com/ghpvc/?username=yTarik0&color=green&style=for-the-badge)
 
 Welcome to the Discord Bot Dr. Zoidberg!
 Just started 1.5 weeks ago coding this bot just for fun.
+Public-Source-Code!
 
   This bot was developed to help you with the management of your Discord server. 
   Its my first discord bot and made with python. Here are some of its features:
@@ -18,6 +19,8 @@ Just started 1.5 weeks ago coding this bot just for fun.
     It also lists all  available admin commands.
 
     3. Help: This command provides you with a list of all available commands and a brief explanation of each command's function.
+    
+    4. /chatai: You communicate with the AI "ChatGPT" from Discord.
 
   Dr. Zoidberg is easy to use and offers a variety of useful features to manage your Discord server. Give it a try and experience how easy it can be!
  
