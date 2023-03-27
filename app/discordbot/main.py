@@ -411,6 +411,6 @@ async def status_task():
         await asyncio.sleep(3)
 
 
-# client.run("ODAzMjE2Njc0NjMwMjcwOTg3.G2-80B.MuNxu6Sk5xDPASdIdRsoS6mjPVjEy9TNey0k40")
+
 discord_token = os.getenv('DISCORD_TOKEN')
 
