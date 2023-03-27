@@ -31,7 +31,7 @@ Information for People who want to add the Dr.Zoidberg Bot to their Discord Serv
   If you have any question you can contact me on:
   
     https://twitter.com/yTarik0
-    Discord: tarik#5891
+    Discord: tarik#7090
 
 
 Invite Link for the Dr.Zoidberg-Bot:
