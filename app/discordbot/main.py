@@ -21,41 +21,17 @@ load_dotenv()
 
 # blacklisted words
 blacklist = [
-    "anus",
-    "anal", "biatch", "bitch",
-    "cum", "cock",
-    "dick", "dick",
-    "faggot", "fatass",
-    "gay" "goyim",
-    "gypsy", "gipsy",
-    "homo",
-    "hurensohn",
-    "hure",
-    "lesbo",
-    "lesbe",
-    "negress",
-    "negro",
-    "nig",
-    "nig-nog",
-    "nigga",
-    "nigger",
-    "nigg4",
-    "neger",
-    "nigguh",
-    "neger",
-    "nutte",
-    "nuttensohn",
-    "penis",
-    "prostitute",
-    "pussie",
-    "pussy",
-    "schlampe",
-    "slut",
-    "schwuchtel",
-    "schwanz",
-    "tits",
-    "titt",
-    "whore"]
+    "anus","anal", "biatch", "bitch","cum", "cock",
+    "dick", "dick","faggot", "fatass","gay" "goyim",
+    "gypsy", "gipsy","homo","hurensohn","hure",
+    "lesbo","lesbe","negress","negro","nig",
+    "nig-nog","nigga","nigger","nigg4","neger",
+    "nigguh","neger","nutte","nuttensohn","penis",
+    "prostitute","pussie","pussy","schlampe","slut",
+    "schwuchtel","schwanz","tits","titt","whore"
+    ]
+
+
 
 def get_eth_balance(wallet_address):
     api_url = f"https://api.etherscan.io/api?module=account&action=balance&address={wallet_address}&tag=latest&apikey=YOUR_API_KEY"
