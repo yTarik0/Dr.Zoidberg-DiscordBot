@@ -21,6 +21,8 @@ Public-Source-Code!
     3. Help: This command provides you with a list of all available commands and a brief explanation of each command's function.
     
     4. /chatai: You communicate with the AI "ChatGPT" from Discord.
+    
+    5. /wallet_balance: gives out the balance for any ETH Wallet
 
   Dr. Zoidberg is easy to use and offers a variety of useful features to manage your Discord server. Give it a try and experience how easy it can be!
  
