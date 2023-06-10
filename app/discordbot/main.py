@@ -57,6 +57,18 @@ blacklist = [
     "titt",
     "whore"]
 
+def get_eth_balance(wallet_address):
+    api_url = f"https://api.etherscan.io/api?module=account&action=balance&address={wallet_address}&tag=latest&apikey=YOUR_API_KEY"
+    response = requests.get(api_url)
+    data = response.json()
+
+    if data['status'] == '1':
+        balance_wei = int(data['result'])
+        balance_eth = balance_wei / 10**18
+        return balance_eth
+    else:
+        return None
+
 
 @client.event
 async def on_ready():
@@ -104,13 +116,8 @@ async def on_message(message):
 
     # <-------Direct Message Awnser ----- coming soon--------->
 
-    # guild = message.guild
-    # if not guild in message.content:
-    # embed = discord.Embed(title="**I'm Sorry I can't handle Direct Messages**", color=discord.Colour.random())
-    # embed.add_field(name="🔰**github**", value="http://github.comytarik0\r\nhttp://github.com/1momo7")
-    # embed.add_field(name="❓**No Idea?**", value=".help")
-    # await message.channel.send(embed=embed)
-
+    
+    
     # <---------automatic mute using blacklisted word--------->
     i = 0
     while i < 1:
@@ -138,46 +145,7 @@ async def on_message(message):
         bot_response = chatgpt_response(prompt=usr_msg)
         await message.channel.send(f"**Awnser:** {bot_response}")
 
-    # <------self role menu------>
-    if message.content.startswith("/selfroles"):
-        if message.author == "tarik#0034" or "second#6923":
-
-            class SelectView(View):
-
-                @discord.ui.select(placeholder="Select your Self-role", options=[
-                    SelectOption(label="Team-Osama", value="Osama", emoji="🪨"),
-                    SelectOption(label="Team-Taliban", value="Taliban", emoji="🧻"),
-                    SelectOption(label="Team-Türk", value="Türk", emoji="✂️"),
-                ])
-                async def select_callback(self, interaction: discord.Interaction,select):
-                    user = interaction.user
-                    osama_role = interaction.guild.get_role(1074707333793452126)
-                    #osama_role = discord.utils.get(role=discord.utils.get(str(1074707333793452126)))
-
-                    if select.values[0] == "Türk":
-                        await interaction.response.send_message("HELLO")
-
-                    if select.values[0] == "Taliban":
-                        await interaction.response.send_message("HELLo")
-
-                    if select.values[0] == "Osama":
-                        await interaction.user.add_roles(osama_role)
-                        embed = discord.Embed(title=f"**{user.name} successfully picked the Osama Role ✅**",
-                                              color=discord.Colour.random())
-                        embed.add_field(name="📆**Choosed Role on **", value=interaction.created_at.strftime("%Y-%m-%d"))
-                        embed.add_field(name="🆔**User ID**", value=user.id)
-                        embed.set_thumbnail(url=user.avatar.url)
-                        embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
-                        await interaction.response.send_message(embed=embed)
-
-            view = SelectView()
-            await message.channel.send(view=view)
-        else:
-            embed = discord.Embed(title=f"**You are not allowed to do this!**",
-                                  color=discord.Colour.red())
-
-
-# <------tesing menu input------
+ 
 
 # <---------ban command---------->
 @client.tree.command(name="ban", description="ban a user")
@@ -391,6 +359,21 @@ async def avatar(interaction: discord.Interaction, user: discord.User):
     embed = discord.Embed(title=f"**{user}s Avatar:**", color=discord.Colour.yellow()).set_image(url=user.avatar.url)
     embed.set_footer(text="⭐  • Dr.Zoidberg | Systems")
     await interaction.response.send_message(embed=embed)
+    
+# <---------- ETH WALLET BALANCE--------->
+@client.tree.command(name="wallet_balance", description="gives the ETH Balance of a Wallet")
+async def wallet_balance(interaction: discord.Interaction, wallet_adress: str):
+    wallet_adress = wallet_adress.strip()
+    balance = get_eth_balance(wallet_adress)
+
+    if balance is not None:
+        embed = discord.Embed(title=f"Der aktuelle ETH-Saldo des Wallets {wallet_adress} beträgt {balance} ETH")
+        embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
+        await interaction.response.send_message(embed=embed)
+    else:
+        embed = discord.Embed(title="Fehler beim Abrufen des ETH-Saldos")
+        embed.set_footer(text="⭐ • Dr.Zoidberg | Systems")
+        await interaction.response.send_message(embed=embed)
 
 
 # <-----Change Status------->
